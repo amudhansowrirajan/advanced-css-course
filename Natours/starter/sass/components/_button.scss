@@ -1,0 +1,115 @@
+@import "../abstracts/variables";
+
+.btn {
+  &,
+  &:link,
+  &:visited {
+    /* we use the link pseudo-class which is the special states of a selector - when it a state of an anchor class */
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+
+    display: inline-block;
+    /* if it was a block element then it would take the entire horizontal block, with it as an inline block it will only consume enough space for the text/content inside to occupy it. and we ban treat it like a block element*/
+    border-radius: 10rem;
+    transition: all 0.2s;
+    /* this "all" causes all the properties to be animated to a particular time  */
+    /* Notes:: the transition property has to be in the initial state. and not on the event e.g. hover */
+
+    position: relative;
+    /* this is becasue we can use the absolute property to hide the btn::after selector */
+
+    font-size: $default-font-size;
+
+    // Notes:: changes for teh button in the form
+    border: none;
+    cursor: pointer;
+  }
+
+  /* both transform:translates in hover and active state happens in relation to the  */
+  &:hover {
+    transform: translateY(-3px);
+    /* down is positive and up is negative */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    &::after {
+      /* this triggers when the hover is on the BTN class and the declarations here are concerned with the ":after" pseudo class  */
+      transform: scaleX(1.5) scaleY(1.2);
+      opacity: 0;
+    }
+  }
+
+  &:active,
+  &:focus {
+    // active is when we click the link or interact with it
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  &::after {
+    /* Notes:: the after psuedo element is basically treated like a child of the pseudo element. this also creates a new element */
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    animation: moveInBottom 1s ease-out 0.75s;
+    animation-fill-mode: backwards;
+    /* animation fill mode stops the buttons from being present in the webpage before the animation has happened */
+    // testing animation
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+}
+
+.btn-text {
+  &:link,
+  &:visited {
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 1px solid $color-primary;
+    padding: 3px;
+    font-size: $default-font-size;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 1rem rgba($color-primary-light, 0.45);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    // it active when it gets clicked
+    box-shadow: 0 0.5rem 1rem rgba($color-primary-light, 0.5);
+    transform: translateY(2px);
+  }
+}

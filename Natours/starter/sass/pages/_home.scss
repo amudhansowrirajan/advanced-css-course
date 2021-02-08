@@ -1,0 +1,86 @@
+.section-about {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0; // this should also be in vh?
+  margin-top: -20vh;
+  // we calculated the -20vh from the 95vh height of the header section and subtract -20vh from the polygon variable
+
+  @include respond(tabPort) {
+    padding: 30rem 0 15rem 0;
+  }
+}
+
+.section-features {
+  padding: 20rem 0;
+
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-dark, 0.8),
+      rgba($color-primary-light, 0.8)
+    ),
+    url("../../img/nat-4.jpg");
+  background-size: cover; // setting it to cover covers the entire section.
+
+  // Notes::The skew is an plternative to the polygon that we used in the header section. this keeps all the skew code together incase we want to change it in the future. all declarations  below deal with it.
+
+  transform: skewY(-7deg);
+  // this is the direct child selector.
+  & > * {
+    transform: skewY(7deg); // the row div
+  }
+  // if we did & * {} then everything inside the child will also be skew +7 deg. this selects recursively.
+  margin-top: -10rem;
+
+  @include respond(tabPort) {
+    padding: 10rem 0;
+  }
+}
+
+.section-tours {
+  background-color: $color-grey-light-1;
+  padding: 25rem 0 10rem 0;
+  margin-top: -10rem;
+
+  @include respond(tabPort) {
+    padding: 20rem 0 5rem 0;
+  }
+}
+
+.section-stories {
+  // background-color: $color-grey-light-1;
+  padding: 10rem 0;
+  position: relative;
+
+  @include respond(tabPort) {
+    padding: 5rem 0;
+  }
+}
+
+.section-book {
+  padding: 10rem 0;
+  background-image: linear-gradient(
+    to right bottom,
+    $color-primary-light,
+    $color-primary-dark
+  );
+}
+
+.book {
+  // the white in the linear gradient starts from 40% (it is white before it) and the orangered starts from 60%. the gradation of color change only happens between 40 and 60%. we however we dont want any gradation to take place so we just use 50% for both
+  // the solid color gradient
+  background-image: linear-gradient(
+      105deg,
+      rgba($color-white, 0.8) 55%,
+      transparent 55%
+    ),
+    url(../../img/nat-10.jpg);
+  background-size: 100%; // 100% will also work
+  height: 50rem; // to be removed later on
+
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, 0.3);
+
+  &__form {
+    width: 50%;
+    padding: 6rem;
+  }
+}

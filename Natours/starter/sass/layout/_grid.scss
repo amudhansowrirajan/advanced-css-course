@@ -1,0 +1,84 @@
+// Notes:: we are changing the grid at the tablet protrait breakpoint beacuse the phone width of 600 would be too late.
+
+.row {
+  max-width: $grid-width; // if the screen size is less than the max width then the screen will simply occupy all the width available.
+
+  // the standard is to design for screens of 1140px or 114rems in width. From this width we adjust the designs for the other screen sizes.
+
+  margin: 0 auto; // this is the standard to center a block element inside a another element.
+  @include clearfix;
+
+  // to ensure that the the cards and stories etc which currently take up all the width are not available.
+  @include respond(tabPort) {
+    max-width: 50rem;
+    padding: 0 3rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+
+    // &:last-child {
+    //   margin-bottom: 0;
+    // } // Notes:: we are doing the same thing with the "not" pseudo selector.
+
+    @include respond(tabPort) {
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+  // attribute selector so that we can target all the rows
+
+  [class^="col-"] {
+    // "^" - this will select all the elements where the class attribute STARTS with "col-"
+    // "$" - this will select all the elements where the class attribute ENDS with "col-"
+    // "*" - class*="col-" - will select any class that contain the col- value.
+    // we can also select elements that contain a particular attribute e.g. src
+
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+
+    @include respond(tabPort) {
+      width: 100% !important;
+      margin-right: 0; // since they are no longer horizontally stacked.
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+
+  .col-1-of-2 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+    // we use 100% of the inherited width.
+    // background-color: orangered;
+    // float: left;
+
+    // &:not(:last-child) {
+    //   margin-right: $gutter-horizontal;
+    // } //moved to the [class^="col-"] selector
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - (#{$gutter-horizontal}* 2)) / 3);
+  }
+
+  .col-2-of-3 {
+    width: calc(
+      ((100% - (#{$gutter-horizontal}* 2)) / 3) * 2 + #{$gutter-horizontal}
+    );
+    // 2 times the width of the column and then add the gutter width
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - (#{$gutter-horizontal}* 3)) / 4);
+  }
+  .col-2-of-4 {
+    width: calc(
+      ((100% - (#{$gutter-horizontal}* 3)) / 4) * 2 + #{$gutter-horizontal}
+    );
+  }
+  .col-3-of-4 {
+    width: calc(
+      ((100% - (#{$gutter-horizontal}* 3)) / 4) * 3 + #{$gutter-horizontal} + #{$gutter-horizontal}
+    );
+  }
+}

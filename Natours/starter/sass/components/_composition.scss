@@ -1,0 +1,70 @@
+.composition {
+  position: relative;
+  &__photo {
+    // in order to have flexible images we always want to define the width of the images flexibly.
+    width: 55%;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+    border-radius: 2px;
+    // to superimpose the photo we are going to use absolute positioning and then use the z-index to sort them
+    position: absolute;
+    // we use the z-index to make it come to the front
+    z-index: 5;
+    transition: all 0.3s;
+
+    // the outline offset is used to push the outline further from the constaining box.
+    outline-offset: 1rem;
+
+    @include respond(tabPort) {
+      float: left;
+      position: relative;
+      width: 33.33333%;
+      box-shadow: 0 1.5rem 3rem rgba($color-black, 0.2);
+    }
+
+    &--p1 {
+      left: 0;
+      top: -2rem;
+      @include respond(tabPort) {
+        top: 0;
+        transform: scale(1.1);
+      }
+    }
+
+    &--p2 {
+      right: 0;
+      top: 2rem;
+
+      @include respond(tabPort) {
+        top: -2rem;
+        transform: scale(1.3);
+        z-index: 30;
+      }
+    }
+
+    &--p3 {
+      left: 20%; //width - so it is defined in %
+      top: 10rem;
+      @include respond(tabPort) {
+        top: 0rem;
+        left: 0;
+        transform: scale(1.1);
+      }
+    }
+
+    &:hover {
+      // we create the border using the outline property
+      outline: 0.5rem solid $color-primary;
+      transform: scale(1.3) translateY(-0.5rem);
+      box-shadow: 0 4.5rem 4rem rgba($color-black, 0.4);
+      z-index: 6;
+    }
+  }
+  // &:not(:hover) {
+  //   transform: scale(0.7);
+  // }
+
+  &:hover &__photo:not(:hover) {
+    // select the entire box then select the photos and find the ones not hovered and shrink them
+    transform: scale(0.9);
+  }
+}

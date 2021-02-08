@@ -1,0 +1,310 @@
+.card {
+  // Notes:: we use the backface visibility property to hide anything that has rotated (backface is invisible). set an initial backface rotes to 180deg. then when one is hidden the other is revealed.
+
+  // // perspective has to be on the parent element. Makes the rotation transform more 3-d. the lower the value the dramatic the prespective.
+  perspective: 150rem;
+  // -moz-perspective: 150rem;
+  position: relative;
+  height: 52rem; // since we have absolute positioning this element loses all its height. so we restate the height here aswell.
+
+  &__side {
+    font-size: 2rem;
+    width: 100%;
+
+    border-radius: 10px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+    height: 52rem;
+    transition: all 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+
+    overflow: hidden; // this is to stop the child image from overlapping with the parent and getting rid of the borders.
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    &--back {
+      // background-color: green;
+      transform: rotateY(180deg);
+      // display: none;
+
+      &-1 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        );
+      }
+
+      &-2 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        );
+      }
+
+      &-3 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        );
+      }
+    }
+  }
+
+  &:hover &__side {
+    // transition: all 0.8s;
+    // perspective: 140rem;
+
+    &--front {
+      transform: rotateY(-180deg); // 180 moves it in the other direction
+      // display: none;
+    }
+
+    &--back {
+      transform: rotateY(0deg);
+      // display: block;
+    }
+  }
+
+  // Description:: frontside styling
+
+  &__picture {
+    background-size: cover;
+    height: 23rem; //trial and error
+    background-blend-mode: screen;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    &--1 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        ),
+        url("../../img/nat-5.jpg");
+    }
+    &--2 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        ),
+        url("../../img/nat-6.jpg");
+    }
+    &--3 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        ),
+        url("../../img/nat-7.jpg");
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%; // control the width
+  }
+
+  &__heading-span {
+    // seperate and not nested in heading because the it is not a child of the __heading selector.
+    // width: 75%;
+    padding: 1rem 1.5rem; //the break doesnt get applied the padding to the break points. so to do that we use the box-decoration break.
+
+    &--1 {
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-secondary-light, 0.85),
+        rgba($color-secondary-dark, 0.85)
+      );
+    }
+
+    &--2 {
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.85),
+        rgba($color-primary-dark, 0.85)
+      );
+    }
+
+    &--3 {
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-tertiary-light, 0.85),
+        rgba($color-tertiary-dark, 0.85)
+      );
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+    ul {
+      list-style-type: none;
+      width: 80%;
+      margin: 0 auto;
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
+  }
+
+  // Description:: backside styling
+
+  &__cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+  }
+
+  &__price-box {
+    text-align: center;
+    color: $color-white;
+    margin-bottom: 8rem;
+  }
+
+  &__price-only {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
+  }
+
+  // Description::
+  @include respond(tabPort) {
+    // perspective: 150rem;
+
+    // position: relative;
+    height: auto; // we gave it height because we floted it. Now we are not floating it.
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+    border-radius: 3px;
+    background-color: $color-white; // to fill the gap with the
+    &__side {
+      // font-size: 2rem;
+      // width: 100%;
+      // transition: all 0.8s ease;
+      // box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);// we dont need to change this.
+
+      height: auto;
+      box-shadow: none;
+
+      // border-radius: 3px;
+      position: relative; // we are placing everything on the same side.
+      // overflow: hidden;
+      // top: 0;
+      // left: 0;
+      // backface-visibility: hidden; // they will both be facing the same side so we can get rid of the back face visibility.
+
+      // &--front {
+      //   background-color: $color-white;
+      // }
+
+      &--back {
+        transform: rotateY(0deg);
+        clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+
+        // &-1 {
+        //   background-image: linear-gradient(
+        //     to right bottom,
+        //     $color-secondary-light,
+        //     $color-secondary-dark
+        //   );
+        // }
+
+        // &-2 {
+        //   background-image: linear-gradient(
+        //     to right bottom,
+        //     $color-primary-light,
+        //     $color-primary-dark
+        //   );
+        // }
+
+        // &-3 {
+        //   background-image: linear-gradient(
+        //     to right bottom,
+        //     $color-tertiary-light,
+        //     $color-tertiary-dark
+        //   );
+        // }
+      }
+    }
+
+    &:hover &__side {
+      &--front {
+        transform: rotateY(0);
+      }
+
+      // &--back { // no need change this.
+      //   transform: rotateY(0deg);
+      // }
+    }
+    &__details {
+      padding: 1rem 3rem;
+    }
+
+    // Description:: Frontside Styling
+
+    // Description:: backside styling
+
+    &__cta {
+      position: relative; // changed this to relative. So ten everything became visible.
+      top: 0%;
+      left: 0%;
+      transform: translate(0);
+      width: 100%;
+      // text-align: center;// no change
+      padding: 7rem 4rem 4rem 4rem; // i added this
+    }
+
+    &__price-box {
+      // text-align: center;
+      // color: $color-white;
+      margin-bottom: 3rem;
+    }
+
+    // &__price-only {
+    //   font-size: 1.5rem;
+    //   text-transform: uppercase;
+    // }
+
+    &__price-value {
+      font-size: 4rem;
+      // font-weight: 100;
+    }
+  }
+}

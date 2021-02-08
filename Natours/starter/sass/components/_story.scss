@@ -1,0 +1,70 @@
+.story {
+  width: 75%;
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.2);
+  background-color: rgba($color-white, 0.5);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  @include respond(tabPort) {
+    transform: skewX(0deg);
+    width: 100%;
+  }
+
+  & > * {
+    transform: skewX(12deg);
+  }
+
+  &__shape {
+    height: 15rem;
+    width: 15rem;
+    // background-color: orangered;
+    float: left;
+
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(
+      50% at 50% 50%
+    ); // radius - 50% of the radius adn the 2nd argueremnt is the position of the center of the circle. (50% of the left and from the top. This only works if the element has defined height and dimensions. It also needs to be floated. The Shape-outside determines the edges around which the text flows whereas the clip-path determines the size of the circle itself.
+
+    clip-path: circle(50% at 50% 50%);
+
+    transform: translateX(-3rem) skewX(12deg); // this is the best way to alter the postion of a floated object. This mooves it slightly to the left. The skew is used to counteract the skew in the story div
+
+    position: relative;
+  }
+
+  &__img {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    // backface-visibility: hidden;// we didnt nee it here but it is a fix for any transition issues.
+    transition: all 0.5s;
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden;
+  }
+
+  &:hover &__caption {
+    // as soon as the story is hovered we modify the caption container.
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover &__img {
+    scale: 0.95;
+    filter: blur(5px) brightness(70%); //this has other effect. basically used to adjust the rendering of the images. e.g. hue-rotate
+  }
+}

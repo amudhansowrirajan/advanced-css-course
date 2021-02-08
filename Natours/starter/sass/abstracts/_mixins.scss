@@ -1,0 +1,69 @@
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Description:: Media Query Manager
+ Pixel ranges
+0 - 600px - Phones (max-width)
+601 - 900 - tablet in portrait mode (max-width)
+901 - 1200 - tablet in landscape (max-width)
+1201 - 1800 - normal mode (max-width)
+1800+ - very large monitors. (min-width)
+*/
+
+// @mixin respond-phone {
+//   @media (max-width: 600px) {
+//     @content; // this is the content utility -     this inserts anything inserted at the point of us under this media query.
+//   }
+// }
+
+// breakpoint arguement choices.
+//  phone
+//  tab-port
+//  tab-land
+//  big-desktop
+
+// we want the the size of the website to be affected by base font size so we can switch to em that will convert pixels. Since we want it to scale it will be em's. -- we want the website to scale with the base font size of the website.
+
+// 1em is 16px.
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 37.5em) {
+      //600px
+      @content;
+    }
+  }
+
+  @if $breakpoint == tabPort {
+    @media (max-width: 56.25em) {
+      //900px
+      @content;
+    }
+  }
+
+  @if $breakpoint == tabLand {
+    @media (max-width: 75em) {
+      //1200px
+      @content;
+    }
+  }
+
+  @if $breakpoint == bigDesktop {
+    @media (min-width: 112.5em) {
+      //1800px
+      @content;
+    }
+  }
+}

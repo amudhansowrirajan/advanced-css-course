@@ -1,0 +1,112 @@
+.form {
+  &__group {
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+  &__input {
+    font-size: 1.5rem;
+    // input elements do not inherit the font properties
+    font-family: inherit;
+    color: inherit;
+
+    padding: 1.5rem 2rem;
+    border-radius: 3px;
+    background-color: rgba($color-white, 0.5);
+    border: none;
+    border-bottom: 3px solid transparent; // so that the input does not gain 3px and shift the layout.
+    width: 80%;
+    display: block;
+    transition: all 0.3s;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary-dark;
+      // outline: 3px solid $color-primary-dark; // this was mine
+      // we always need to have some indication of what field in the form is selected.
+    }
+
+    &:focus:invalid {
+      // if there is an invalid input these declarations become active.
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    &::placeholder {
+      color: $color-grey-dark-2;
+      font-weight: 700;
+    }
+  }
+
+  // &::-webkit-input-placeholder {
+  //   color: red;
+  // }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.9rem;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  &__input:placeholder-shown + &__label {
+    // + is the adjacent sibling selector operator. ~ is an other operator that select one among the siblings
+    opacity: 0;
+    visibility: hidden; // we use the opacity because we cannot animate the visibilty property.
+    transform: translateY(-4rem);
+  }
+
+  &__radio-group {
+    // we cannot style the actual radio buttons so we will hide them and then use the label to provide user feedback.
+    width: 45%;
+    display: inline-block;
+  }
+
+  &__radio-input {
+    // visibility: hidden;
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4rem;
+  }
+
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+
+    position: absolute;
+    left: 0;
+    top: -0.6rem;
+    // transform: translate(0, 15%); // how is centered the radial dials
+
+    &::after {
+      content: "";
+      display: block;
+      height: 1.25rem;
+      width: 1.25rem;
+      border-radius: 50%;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  &__radio-input:checked + &__radio-label &__radio-button::after {
+    // we nede to add the ::after to select the after pseudo element
+    opacity: 1;
+  }
+}

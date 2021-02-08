@@ -1,0 +1,57 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /*  box-sizing: border-box; - moved to the body and we are using inheritance */
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  /* this will override the user set font size. So we will use percentages instead of px
+  this is also concerned about type but it is global setting rather than dealing exclusively with type. 
+  */
+
+  // @include respond-phone {
+  //   font-size: 50%;
+  // }
+
+  @include respond(tabLand) {
+    //1200px
+    // 1 rem = 8px
+    font-size: 56.25%;
+  }
+
+  @include respond(tabPort) {
+    //900px
+    // 1 rem = 8px
+    font-size: 50%;
+  }
+
+  @include respond(phone) {
+    //600px
+    // 1 rem = 8px
+    font-size: 40%;
+    // this is the base font size.
+  }
+
+  @include respond(bigDesktop) {
+    //1200px
+    // 1 rem = 12px
+    font-size: 75%;
+  }
+}
+
+body {
+  // the typography section of the body elements has been moved to the typography section in the base folder.
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tabPort) {
+    padding: 0;
+  }
+}

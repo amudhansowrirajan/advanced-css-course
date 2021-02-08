@@ -1,0 +1,99 @@
+.popup {
+  height: 100vh;
+  width: 100%; // this is redundent
+  background-color: rgba($color-black, 0.8);
+  padding: 15vh 10%;
+  // float: left;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+
+  // display: none; - we can not animate display none.
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
+  &__content {
+    @include absCenter;
+    // margin: 0 auto; used the mixins _ absolute positioning
+    // padding: 15vh 10%;
+    // height: 50rem; //50vh;
+    width: 75%;
+    background-color: white;
+    box-shadow: 0 2rem 4rem rgba($color-black, 0.2);
+    border-radius: 5px;
+
+    display: table;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    transition: all 0.4s 0.2s; // 0.2 is the delay
+  }
+
+  &__left {
+    width: 33.333333333%;
+    // float: left; // we are not using floats because we will not be able to center the right container. the img will have its own height and the text will also have its own height. So we will use tables and cell instead.
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  &__right {
+    width: 66.666666667%;
+    // float: left;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3rem 5rem;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+  }
+
+  &__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    column-count: 2;
+    column-gap: 4rem; // if we use em - it is alwasys use the current font size and not the inherited one. It calculates the fonts size for an element and then does the calculation.
+    column-rule: 1px solid $color-grey-light-2;
+    // hypenations
+    hyphens: auto; // this hypen tag will only work when we have defined the 'lang=en' in the HTML tag at the begginning of the website.// this should also contain the
+  }
+
+  &:target {
+    //when this id is target #popup -> address is localhost:5050/#popup these set of declarations are run.
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // open states
+  &:target &__content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-light-3;
+      position: absolute;
+      // we dont need to position:relative on its parent property. It will position itself wrt to __content since it is the 'bubble-up' parent that has position relative.
+      top: 2.5rem;
+      right: 2.5rem;
+      line-height: 1rem;
+      // this close button is taller than it is wide so the equal offset was not working so we set the lineheight and then it started to work.
+
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    &:hover {
+      color: $color-primary-light;
+    }
+  }
+}
