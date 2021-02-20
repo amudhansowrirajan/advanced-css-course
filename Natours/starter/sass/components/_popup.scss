@@ -1,6 +1,6 @@
 .popup {
   height: 100vh;
-  width: 100%; // this is redundent
+  width: 100%; // this is not redundent
   background-color: rgba($color-black, 0.8);
   padding: 15vh 10%;
   // float: left;
@@ -15,11 +15,20 @@
   visibility: hidden;
   transition: all 0.3s;
 
+  @supports (
+    -webkit-backdrop-filter: blur(10px) or (backdrop-filter: blur(10px))
+  ) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
   &__content {
     @include absCenter;
+
     // margin: 0 auto; used the mixins _ absolute positioning
     // padding: 15vh 10%;
     // height: 50rem; //50vh;
+
     width: 75%;
     background-color: white;
     box-shadow: 0 2rem 4rem rgba($color-black, 0.2);
@@ -38,6 +47,12 @@
     // float: left; // we are not using floats because we will not be able to center the right container. the img will have its own height and the text will also have its own height. So we will use tables and cell instead.
     display: table-cell;
     vertical-align: middle;
+
+    @include respond(tabPort) {
+      // width: 100%;
+
+      display: table-row;
+    }
   }
 
   &__right {
@@ -51,6 +66,20 @@
   &__img {
     display: block;
     width: 100%;
+
+    &--hide {
+      @include respond(tabPort) {
+        // width: 100%;
+
+        display: none;
+      }
+    }
+
+    // &--show {
+    //   @include respond(tabPort) {
+    //     // height: 80%;
+    //   }
+    // }
   }
 
   &__text {
@@ -62,6 +91,13 @@
     column-rule: 1px solid $color-grey-light-2;
     // hypenations
     hyphens: auto; // this hypen tag will only work when we have defined the 'lang=en' in the HTML tag at the begginning of the website.// this should also contain the
+
+    @include respond(tabPort) {
+      // width: 100%;
+
+      column-count: 1;
+      font-size: 2rem;
+    }
   }
 
   &:target {

@@ -10,8 +10,13 @@
   transform: skewX(-12deg);
 
   @include respond(tabPort) {
-    transform: skewX(0deg);
     width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    transform: skewX(0deg);
   }
 
   & > * {
@@ -34,6 +39,10 @@
     transform: translateX(-3rem) skewX(12deg); // this is the best way to alter the postion of a floated object. This mooves it slightly to the left. The skew is used to counteract the skew in the story div
 
     position: relative;
+
+    @include respond(phone) {
+      transform: translateX(-3rem) skewX(0deg);
+    }
   }
 
   &__img {
@@ -41,6 +50,14 @@
     transform: translateX(-4rem) scale(1.4);
     // backface-visibility: hidden;// we didnt nee it here but it is a fix for any transition issues.
     transition: all 0.5s;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+
+    @include respond(phone) {
+      transform: skewX(0deg);
+    }
   }
 
   &__caption {

@@ -307,3 +307,68 @@ base > typography > general layout + grid > page layout > components.
   4.  page layout > 
   5.  components >
 */
+
+/*
+Description:: Responsive Images - dont waste the date tranfered. 
+
+the 3 use cases:
+ 1. Resolution switching
+ 2. Density switching - based on pixel density of the screen. hiRes or low res screens. 
+ 3. Art Direction - serve an entirely different image based on the screen size or focus on a different part of the image. 
+
+
+ Responsive images in HTML - SRCSET attribute. 
+        <img
+          srcset="./img/logo-green-1x.png 1x, ./img/logo-green-2x.png 2x"
+          alt="full logo"
+          class="footer__logo"
+        />
+if its a low density screen it will use a low resolution image and if its a high density screen it will use the higher resolution screen. The screen res is set by the 1x and 2x after the image location and we use commas in this attribute. 
+
+we can also run media queries using CSS.  
+  @media(min-resolutionL 192dpi){ - to target the higher resolution screens. }
+
+  - we can also combine media queries using the 'and' / ',' operator.  
+
+*/
+
+/*
+Description:: Browser Support in Modern web development
+
+ -caniuse -> handy place to test all the supporting features in a browser. 
+
+ Graceful Degradation - work with what works in each browser.
+
+ @supports (criteria) {
+    this sets conditions or test whether a certain feature is supported for execution in the browser and implements it if it works.
+
+    used in __header.scss
+  }
+
+*/
+
+// overflow: hidden; When the image is bigger than the element if overflows the box. This can hide whatever is outside of it.
+
+/*
+Description:: A simple build process with NPM scripts 
+
+  Autoprefixer does not work. 
+  to run two terminal with the same command of code   
+  "Start":"npm-run-all --parallel devserver watch:sass"
+  we set the option as being parallel. 
+
+*/
+// Notes:: this changes the color of the highlighted text and we inserted in it in the _base.scss element.
+// ::selection {
+//   background-color: $color-primary-light;
+//   color: $color-white;
+// }
+
+/*
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+this ontent="width=device-width needs to be here because it tell s the
+browser that the width of the page has to be the width of the screen
+otherwise  the page will shrink to the largest possible version of itself and then lower the %. i.e. it will fit to the size of the browser
+
+
+*/

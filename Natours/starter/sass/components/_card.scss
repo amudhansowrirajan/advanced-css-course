@@ -205,7 +205,8 @@
   }
 
   // Description::
-  @include respond(tabPort) {
+  // @include respond(tabPort) {
+  @media only screen and (max-width: 56.25em), only screen and (hover: none) {
     // perspective: 150rem;
 
     // position: relative;
@@ -214,6 +215,7 @@
 
     border-radius: 3px;
     background-color: $color-white; // to fill the gap with the
+
     &__side {
       // font-size: 2rem;
       // width: 100%;
